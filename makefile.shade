@@ -203,10 +203,15 @@ var buildTarget = "compile"
             CloneOrUpdate(repo);
 
             GitCommand(repo, "checkout origin/release -B master");
-            File.Copy(Path.Combine("build-template", "NuGet.master.config"),
-                      Path.Combine(repo, "NuGet.config"),
-                      overwrite: true);
-            GitCommand(repo, "commit -am \"Updating NuGet.config\"");
+
+    	    if(File.Exists(Path.Combine(repo, "NuGet.config")))
+            {
+
+                File.Copy(Path.Combine("build-template", "NuGet.master.config"),
+                          Path.Combine(repo, "NuGet.config"),
+                          overwrite: true);
+                GitCommand(repo, "commit -am \"Updating NuGet.config\"");
+    	    }
 
             GitCommand(repo, "push origin master:master -f");
         }
