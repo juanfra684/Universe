@@ -132,7 +132,7 @@ __dnvm_unpack() {
 
     #Set shell commands as executable
     find "$runtimeFolder/bin/" -type f \
-        -exec sh -c "head -c 11 {} | grep '/bin/bash' > /dev/null"  \; -print | xargs chmod 775
+        -exec sh -c "head -n 1 {} | grep 'bash' > /dev/null"  \; -print | xargs chmod 775
 }
 
 __dnvm_requested_version_or_alias() {
